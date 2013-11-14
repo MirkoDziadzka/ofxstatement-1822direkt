@@ -30,15 +30,20 @@ You need python 3.x to run this as ofxstament seems to requires python3
 Setup
 =====
 
+Check if plugin is installed:
 
  $ ofxstatement list-plugins
+
  germany_1822direkt
+
+Edit config (add your account id here)
 
  $ ofxstatement edit-config
 
  [1822direkt]
 
  plugin = germany_1822direkt
+
  account = 12345678
 
 
