@@ -65,24 +65,3 @@ class PostbankXMLParser(StatementParser):
 
 
 
-        """
-        res = {}
-        res['iban'] = root.findall(P('BkToCstmrAcctRpt','Rpt','Acct','Id','IBAN'))[0].text
-
-        for entry in root.findall(P('BkToCstmrAcctRpt','Rpt','Ntry')):
-            pe = {}
-            pe['amount'] = float(entry.findall(P('Amt'))[0].text)
-            pe['currency'] = entry.findall(P('Amt'))[0].attrib['Ccy']
-            pe['type'] =  entry.findall(P('CdtDbtInd'))[0].text
-            pe['book date'] =  entry.findall(P('BookgDt','Dt'))[0].text
-            pe['value date'] =  entry.findall(P('ValDt','Dt'))[0].text
-            pe['debitor'] =  entry.findall(P('NtryDtls','TxDtls','RltdPties','Dbtr','Nm'))[0].text
-            pe['creditor'] =  entry.findall(P('NtryDtls','TxDtls','RltdPties','Cdtr','Nm'))[0].text
-            pe['text'] = ' '.join([e.text for e in entry.findall(P('NtryDtls','TxDtls','RmtInf','Ustrd'))])
-            res.setdefault('entries',[]).append(pe)
-
-        retfloat(urn res
-        """
-
-
-
