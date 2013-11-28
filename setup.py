@@ -32,7 +32,10 @@ setup(name='ofxstatement-germany-1822direkt',
       namespace_packages=["ofxstatement", "ofxstatement.plugins"],
       entry_points={
           'ofxstatement':
-          ['germany_1822direkt = ofxstatement.plugins.germany_1822direkt:FrankfurterSparkasse1822Plugin']
+          [
+              'germany_1822direkt = ofxstatement.plugins.germany_1822direkt:FrankfurterSparkasse1822Plugin',
+              'germany_postbank = ofxstatement.plugins.germany_postbank:PostbankXMLPlugin'
+          ]
           },
       install_requires=['ofxstatement'],
       include_package_data=True,
