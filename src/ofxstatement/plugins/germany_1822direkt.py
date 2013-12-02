@@ -28,6 +28,9 @@ class FrankfurterSparkasse1822Parser(CsvStatementParser):
         # FIXME: add header validation
         if self.cur_record <= 2:
             return None
+        if len(line) < 3:
+            """e.g.: ['# 1 vorgemerkte Umsätze nicht angezeigt']"""
+            return None
         if not line[2]:
             return None
         sl = StatementLine()
