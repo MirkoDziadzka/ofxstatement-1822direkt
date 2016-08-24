@@ -3,5 +3,6 @@ PYTHON=.venv/bin/python
 all: PYTHON
 
 PYTHON: setup.py
-	virtualenv -p python3 --no-site-packages .venv
+	-rm -r .venv
+	virtualenv --clear --python python3 .venv
 	$(PYTHON) setup.py develop

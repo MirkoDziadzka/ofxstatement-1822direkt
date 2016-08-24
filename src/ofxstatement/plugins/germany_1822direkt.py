@@ -45,7 +45,17 @@ class FrankfurterSparkasse1822Parser(CsvStatementParser):
         sl.amount = self.parse_float(line[4])
         sl.trntype = 'DEBIT' if sl.amount < 0 else 'CREDIT'
         sl.payee = line[7]
-        sl.memo = "(%s/%s): %s"  % (line[8],line[9], " ".join(line[15:]).strip())
+        # check for special transactions
+        if line[6] == "Entgeltabschluss":
+            sl.memo = "%s: %s %s" % (line[6],line[13],line[14])
+        elif line[6] == "Wertpapiere" or line[7] == "KREDITKARTENABRECHNUNG":
+            sl.memo = "(%s/%s): %s"  % (line[8],line[9], " ".join(line[15:]).strip())
+        elif not line[8] and not line[9]:
+            # empty transaction
+            print("empty", line)
+            return None
+        else:
+            sl.memo = "(%s/%s): %s"  % (line[8],line[9], " ".join(line[15:]).strip())
 
         return sl
 
