@@ -4,6 +4,7 @@ from ofxstatement.plugin import Plugin
 from ofxstatement.parser import CsvStatementParser
 from ofxstatement.statement import StatementLine
 
+
 class FrankfurterSparkasse1822Plugin(Plugin):
     def get_parser(self, filename):
         encoding = self.settings.get('charset', 'iso-8859-1')
@@ -26,12 +27,11 @@ class FrankfurterSparkasse1822Parser(CsvStatementParser):
         return csv.reader(self.fin, delimiter=';')
 
     def parse_float(self, f):
-	# convert a number in german localization (e.g. 1.234,56) into a float
-        return float(f.replace('.','').replace(',','.'))
+        """ convert a number in german localization (e.g. 1.234,56) to float """
+        return float(f.replace('.', '').replace(',', '.'))
 
     def parse_record(self, line):
         # FIXME: add header validation
-        #print(self.cur_record, line)
         if self.cur_record < 2:
             return None
         if len(line) < 3:
@@ -47,16 +47,15 @@ class FrankfurterSparkasse1822Parser(CsvStatementParser):
         sl.payee = line[7]
         # check for special transactions
         if line[6] == "Entgeltabschluss":
-            sl.memo = "%s: %s %s" % (line[6],line[13],line[14])
+            sl.memo = "%s: %s %s" % (line[6], line[13], line[14])
         elif line[6] == "Wertpapiere" or line[7] == "KREDITKARTENABRECHNUNG":
-            sl.memo = "(%s/%s): %s"  % (line[8],line[9], " ".join(line[15:]).strip())
+            sl.memo = "(%s/%s): %s" % (line[8], line[9], " ".join(line[15:]).strip())
         elif not line[8] and not line[9]:
             # empty transaction
             print("empty", line)
             return None
         else:
-            sl.memo = "(%s/%s): %s"  % (line[8],line[9], " ".join(line[15:]).strip())
+            sl.memo = "(%s/%s): %s" % (line[8], line[9], " ".join(e for e in line[13:] if e).strip())
 
         return sl
-
 
