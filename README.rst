@@ -28,24 +28,63 @@ Requirements
 
 You need python 3.x to run this as ofxstament seems to requires python3
 
+
+Installation
+============
+
+There are multiple ways of installing Python packages. This is just one
+example:
+
+.. code:: bash
+
+  pip3 install --user ofxstatement
+  git clone https://github.com/MirkoDziadzka/ofxstatement-1822direkt
+  cd ofxstatement-1822direkt
+  pip3 install --user .
+
+Check the Python documentation on instructions for you operating system and
+setup. Remember you must use Python 3.
+
+
 Setup
 =====
 
 Check if plugin is installed:
 
- $ ofxstatement list-plugins
+.. code:: bash
 
- germany_1822direkt
+  ofxstatement list-plugins
 
-Edit config (add your account id here)
+Expected output::
 
- $ ofxstatement edit-config
+  germany_1822direkt
 
- [1822direkt]
+Edit config. The *account* is the ID used by your accounting program to
+associate the transactions with a certain account. Probably you want to use
+your bank account number (Kontonummer) i.e. the last 10 digits of your IBAN.
 
- plugin = germany_1822direkt
+.. code:: bash
 
- account = 12345678
+  ofxstatement edit-config
+
+A text editor will open. Configure something like this::
+
+  [1822direkt]
+  plugin = germany_1822direkt
+  account = 0123456789
+
+Some other config options you may set are:
+
+* *bank* (default: 50050201)
+* *currency* (default: EUR)
+* *charset* (default: iso-8859-1)
 
 
+Usage
+=====
 
+.. code:: bash
+
+  ofxstatement convert -t 1822direkt umsaetze-0123456789-03.02.2018_15_05.csv test.ofx
+
+You may then import *test.ofx* into gnuCash or a similar accounting program.
