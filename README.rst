@@ -22,12 +22,6 @@ Using `ofxstatement`_ and this plugin, I  successfully converted the
 standard CSV statements (the first of the two available) to OFX and
 import this into my banking software.
 
-**2016-04-26**: They changed the format again. Until This script get
-fixed or they get sane, I only add a converter script from the
-current format to the old CSV format.
-
-**2016-04-27**: I changed the CSV parser to use ';' instead of ','. So the converter script is no longer necessary.
-
 
 Requirements
 ============
