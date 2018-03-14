@@ -8,8 +8,9 @@ from ofxstatement.statement import StatementLine
 class FrankfurterSparkasse1822Plugin(Plugin):
     def get_parser(self, filename):
         encoding = self.settings.get('charset', 'iso-8859-1')
-        f = open(filename, 'r', encoding=encoding)
-        parser = FrankfurterSparkasse1822Parser(f)
+        with open(filename, 'r', encoding=encoding) as f:
+            lines = f.readlines()
+        parser = FrankfurterSparkasse1822Parser(lines)
         parser.statement.account_id = self.settings['account']
         parser.statement.bank_id = self.settings.get('bank', '50050201')
         parser.statement.currency = self.settings.get('currency', 'EUR')
