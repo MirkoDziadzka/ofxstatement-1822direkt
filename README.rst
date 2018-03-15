@@ -6,21 +6,25 @@ ofxstatement-1822direkt
 
 `ofxstatement`_ is a tool
 to convert proprietary bank statement to OFX format, suitable for
-importing to GnuCash. Plugin for `ofxstatement`_ parses a particular
+importing into account programms like GnuCash or YNAB classic.
+
+Plugins for `ofxstatement`_ parses a particular
 proprietary bank statement format and produces common data structure,
 that is then formatted into an OFX file.
 
 This project provides an `ofxstatement`_ plugin for the German bank
-1822direkt.com
+1822direkt.com (and currently also for the German Postbank)
 
-.. _ofxstatement: https://github.com/kedder/ofxstatement
+1822direkt used to provide OFX downloads but have removed this
+useful format and now only have a propriatay CSV (German version).
+Shame on them.
 
-1822direkt used to provide OFX downloads but canceld this without
-warning last weekend.  Shame on them.
+Postbank is providing different formats, one of them is a nicely
+parsable XML format.
 
-Using `ofxstatement`_ and this plugin, I  successfully converted the
-standard CSV statements (the first of the two available) to OFX and
-import this into my banking software.
+Using `ofxstatement`_ and this plugin, I  successfully converted
+both formats to OFX and import this into my accounting software.
+I'm using YNAB classic for now. But GnuCash should also work fine.
 
 
 Requirements
@@ -87,4 +91,7 @@ Usage
 
   ofxstatement convert -t 1822direkt umsaetze-0123456789-03.02.2018_15_05.csv test.ofx
 
-You may then import *test.ofx* into gnuCash or a similar accounting program.
+You may then import *test.ofx* into any accounting program which
+accepts OFX, for example YNAB-classix or gnuCash.
+
+.. _ofxstatement: https://github.com/kedder/ofxstatement
